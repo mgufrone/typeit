@@ -42,14 +42,14 @@ module.exports = function(grunt) {
     },
     watch: {
       scripts: {
-        files: ['Gruntfile.js','assets/js/*.js','!assets/js/dist.js','!assets/js/main.min.js'],
+        files: ['Gruntfile.js','js/*.js','!js/dist.js','!js/main.min.js'],
         tasks: ['concat','uglify'],
         options: {
           spawn: false,
         },
       },
       css: {
-        files: ['assets/css/main.css'],
+        files: ['css/main.css'],
         tasks: ['cssmin'],
         options: {
           spawn: false,
