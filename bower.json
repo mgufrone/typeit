@@ -1,0 +1,26 @@
+{
+  "name": "typeit",
+  "authors": [
+    "Mochamad Gufron <mgufronefendi@gmail.com>"
+  ],
+  "description": "Just typing game",
+  "main": "",
+  "moduleType": [
+    "amd",
+    "es6"
+  ],
+  "license": "MIT",
+  "homepage": "http://mgufron.com",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "pixi.js": "pixi#^3.0.11",
+    "SoundJS": "^0.6.2"
+  }
+}
