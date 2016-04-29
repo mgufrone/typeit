@@ -1,8 +1,12 @@
 var Game = function(stage){
   // All game properties
   // Stage is from stage class. see at stage.js
-  var plainText = "dari dalam dekat dan danau dikau dapat dana dona donat double dean";
-  var texts = plainText.split(" ");
+  var plainText = [
+    "Kata kata mutiara dirangkai sedemikian rupa hingga tercipta sebuah kalimat yang memiliki makna tersembunyi dan tidak semua orang dapat mengartikannya. Keindahan rangkainan kata-katanya juga dapat menyejukkan hati siapa saja yang membacanya. Selain itu kata mutiara yang baik juga dapat memotivasi baik yang membuat maupun siapa saja yang membaca atau mendengarnya. Kata kata mutiara dikelompokkan menjadi beberapa bagian atau kategori, bebrapa diantaranya adalah kata mutiara cinta, persahabatan, kerja, islami, kehidupan, galau bahkan lucu. Bukan hanya itu saja, ada beberapa bahasa yang sering digunakan dalam kata mutiara seperti bahasa Indonesia, Ingris, Jawa, Sunda, dan bahasa daerah lainnya.",
+    "Kata kata mutiara dapat kita diucapkan kepada siapa saja baik itu orang tua, sahabat, kekasih, bahkan di media sosial sekalipun. Di sosial media seperti facebook dan twitter, sering kita temui beberapa orang teman kita membuat postingan tentang kata bijak yang di dalamnya tentu saja mengandung makna mendalam. update status kata bijak mutiara seringkali dilakukan seseorang sesuai dengan kondisinya. Kata yang baik tentu saja akan membuat hati menjadi tenang dan dapat dijadikan sebagai motivasi untuk ke depannya nanti supaya lebih baik lagi.",
+    "Pasti walaupun cuma sepentas Anda pernahh menonton salah satu program di televisi swasata Indonesia yang berjudul Golden Ways. Sosok yang menjadi pengisi acara tersebut tak lain dan tak bukan salah satu motivator terbaik Indonesia yaitu bapak Mario Teguh. Gaya bahasa yang khas dan juga kata motivasi yang super membuat banyak orang meniru kata bijak Mario Teguh. Acara lain yang berisi kata mutiara adalah Hitam Putih, di akhir acara talkshow yang sangat inspiratif ini biasanay dihadirkan kata kata mutiara yang sangat bagus sesuai dengan tema yang sedang diangkat saat itu."
+  ].join(" ").toLowerCase().replace(/[^\sa-z]/ig,"")
+  var texts = Array.from(new Set(plainText.split(" ")));
   this.stage = stage;
   this.backgrounds = [];
   this.usedTexts = [];
@@ -60,7 +64,7 @@ var Game = function(stage){
   }
 
 
-  function markBackground(key){
+  this.markBackground = function(key){
     background = this.backgrounds[key];
     word = this.usedTexts[key];
     var width = background.width;
@@ -109,7 +113,7 @@ var Game = function(stage){
       this.randomWord();
     }
     this.animate();
-    document.addEventListener('keydown', this.keydownHandler);
+    document.addEventListener('keydown', this.keydownHandler.bind(this));
   };
 
   this.keydownHandler = function(event){
@@ -135,8 +139,8 @@ var Game = function(stage){
         if(word.mark.length == word.text.length && word.mark == word.text){
             this.removeWord(key, true);
             this.randomWord();
-            createjs.Sound.play("sound");
-            typedWords += 1;
+            createjs.Sound.play("ding");
+            this.typedWords += 1;
         }
         break;
       }
@@ -147,7 +151,7 @@ var Game = function(stage){
         if(this.usedTexts[key].text[0] == keyString){
           possibleWords.push({
             key: key,
-            background: backgrounds[key]
+            background: this.backgrounds[key]
           });
         }
       }
